@@ -1,0 +1,6 @@
+build/
+*.java
+*.class
+simbuild/
+*.so
+*.swp
