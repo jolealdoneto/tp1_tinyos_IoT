@@ -1,24 +1,18 @@
-README for RadioSenseToLeds
-Author/Contact: tinyos-help@millennium.berkeley.edu
+== TP-IoT ==
 
-Description:
+= Resources =
+* Best one - http://www.tinyos.net/dist-2.0.0/tinyos-2.x/doc/html/tutorial/lesson4.html
 
-RadioSenseToLeds samples a platform's default sensor at 4Hz and broadcasts
-this value in an AM packet. A RadioSenseToLeds node that hears a broadcast 
-displays the bottom three bits of the value it has received. This application 
-is a useful test to show that basic AM communication, timers, and the default 
-sensor work.
+= Environment =
+- For serial forwarder:
+    $ export MOTECOM=sf@localhost:9002
+- For serial using iris:
+    $ export MOTECOM=serial@/dev/ttyUSB1:57600
 
-Tools:
+- Compiling
+    $ make iris
+- Compiling and deploy
+    $ make iris install,<NODE_ID> mib520,/dev/ttyUSB0
 
-After compiling, RadioSenseMsg.java and RadioSenseMsg.py files will be
-created.  RadioSenseMsg.java is a Java class representing the message that
-this application sends.  RadioSenseMsg.py is a Python class representing
-the message that this application sends.
-
-Known bugs/limitations:
-
-None.
-
-
-$Id: README.txt,v 1.5 2007-07-10 20:03:30 klueska Exp $
+- Sending package:
+    $ java net.tinyos.tools.Send 00 FF FF FF 01 08 3F 07 00 02 FF FF 00 00 00 08

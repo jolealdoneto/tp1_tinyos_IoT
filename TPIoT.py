@@ -7,14 +7,14 @@
 import tinyos.message.Message
 
 # The default size of this message type in bytes.
-DEFAULT_MESSAGE_SIZE = 7
+DEFAULT_MESSAGE_SIZE = 8
 
 # The Active Message type associated with this message.
-AM_TYPE = -1
+AM_TYPE = 7
 
 class TPIoT(tinyos.message.Message.Message):
-    # Create a new TPIoT of size 7.
-    def __init__(self, data="", addr=None, gid=None, base_offset=0, data_length=7):
+    # Create a new TPIoT of size 8.
+    def __init__(self, data="", addr=None, gid=None, base_offset=0, data_length=8):
         tinyos.message.Message.Message.__init__(self, data, addr, gid, base_offset, data_length)
         self.amTypeSet(AM_TYPE)
     
@@ -35,15 +35,15 @@ class TPIoT(tinyos.message.Message.Message):
         except:
             pass
         try:
+            s += "  [addressee_nodeid=0x%x]\n" % (self.get_addressee_nodeid())
+        except:
+            pass
+        try:
             s += "  [error=0x%x]\n" % (self.get_error())
         except:
             pass
         try:
             s += "  [data=0x%x]\n" % (self.get_data())
-        except:
-            pass
-        try:
-            s += "  [message_type=0x%x]\n" % (self.get_message_type())
         except:
             pass
         return s
@@ -106,9 +106,64 @@ class TPIoT(tinyos.message.Message.Message):
         return 16
     
     #
-    # Accessor methods for field: error
+    # Accessor methods for field: addressee_nodeid
     #   Field type: int
     #   Offset (bits): 16
+    #   Size (bits): 16
+    #
+
+    #
+    # Return whether the field 'addressee_nodeid' is signed (False).
+    #
+    def isSigned_addressee_nodeid(self):
+        return False
+    
+    #
+    # Return whether the field 'addressee_nodeid' is an array (False).
+    #
+    def isArray_addressee_nodeid(self):
+        return False
+    
+    #
+    # Return the offset (in bytes) of the field 'addressee_nodeid'
+    #
+    def offset_addressee_nodeid(self):
+        return (16 / 8)
+    
+    #
+    # Return the offset (in bits) of the field 'addressee_nodeid'
+    #
+    def offsetBits_addressee_nodeid(self):
+        return 16
+    
+    #
+    # Return the value (as a int) of the field 'addressee_nodeid'
+    #
+    def get_addressee_nodeid(self):
+        return self.getUIntElement(self.offsetBits_addressee_nodeid(), 16, 1)
+    
+    #
+    # Set the value of the field 'addressee_nodeid'
+    #
+    def set_addressee_nodeid(self, value):
+        self.setUIntElement(self.offsetBits_addressee_nodeid(), 16, value, 1)
+    
+    #
+    # Return the size, in bytes, of the field 'addressee_nodeid'
+    #
+    def size_addressee_nodeid(self):
+        return (16 / 8)
+    
+    #
+    # Return the size, in bits, of the field 'addressee_nodeid'
+    #
+    def sizeBits_addressee_nodeid(self):
+        return 16
+    
+    #
+    # Accessor methods for field: error
+    #   Field type: int
+    #   Offset (bits): 32
     #   Size (bits): 16
     #
 
@@ -128,13 +183,13 @@ class TPIoT(tinyos.message.Message.Message):
     # Return the offset (in bytes) of the field 'error'
     #
     def offset_error(self):
-        return (16 / 8)
+        return (32 / 8)
     
     #
     # Return the offset (in bits) of the field 'error'
     #
     def offsetBits_error(self):
-        return 16
+        return 32
     
     #
     # Return the value (as a int) of the field 'error'
@@ -163,7 +218,7 @@ class TPIoT(tinyos.message.Message.Message):
     #
     # Accessor methods for field: data
     #   Field type: int
-    #   Offset (bits): 32
+    #   Offset (bits): 48
     #   Size (bits): 16
     #
 
@@ -183,13 +238,13 @@ class TPIoT(tinyos.message.Message.Message):
     # Return the offset (in bytes) of the field 'data'
     #
     def offset_data(self):
-        return (32 / 8)
+        return (48 / 8)
     
     #
     # Return the offset (in bits) of the field 'data'
     #
     def offsetBits_data(self):
-        return 32
+        return 48
     
     #
     # Return the value (as a int) of the field 'data'
@@ -214,59 +269,4 @@ class TPIoT(tinyos.message.Message.Message):
     #
     def sizeBits_data(self):
         return 16
-    
-    #
-    # Accessor methods for field: message_type
-    #   Field type: short
-    #   Offset (bits): 48
-    #   Size (bits): 8
-    #
-
-    #
-    # Return whether the field 'message_type' is signed (False).
-    #
-    def isSigned_message_type(self):
-        return False
-    
-    #
-    # Return whether the field 'message_type' is an array (False).
-    #
-    def isArray_message_type(self):
-        return False
-    
-    #
-    # Return the offset (in bytes) of the field 'message_type'
-    #
-    def offset_message_type(self):
-        return (48 / 8)
-    
-    #
-    # Return the offset (in bits) of the field 'message_type'
-    #
-    def offsetBits_message_type(self):
-        return 48
-    
-    #
-    # Return the value (as a short) of the field 'message_type'
-    #
-    def get_message_type(self):
-        return self.getUIntElement(self.offsetBits_message_type(), 8, 1)
-    
-    #
-    # Set the value of the field 'message_type'
-    #
-    def set_message_type(self, value):
-        self.setUIntElement(self.offsetBits_message_type(), 8, value, 1)
-    
-    #
-    # Return the size, in bytes, of the field 'message_type'
-    #
-    def size_message_type(self):
-        return (8 / 8)
-    
-    #
-    # Return the size, in bits, of the field 'message_type'
-    #
-    def sizeBits_message_type(self):
-        return 8
     
