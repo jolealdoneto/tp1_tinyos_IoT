@@ -14,4 +14,5 @@ enum {
   AM_TP_IOT = 7,
 };
 
+#define RF230_DEF_RFPOWER 1
 #endif
